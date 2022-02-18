@@ -1,0 +1,66 @@
+.home{
+  background-color: #020A10;
+}
+
+.header {
+  border-bottom: solid 1px black;
+  background-color: #ffffff;
+}
+.inside-header {
+  display: flex;
+  padding: 2rem;
+}
+
+.nav-tabs{
+  border-bottom: none;
+}
+
+.nav-tabs .nav-item:hover, .nav-link:hover{
+  border: none;
+  color: black;
+}
+
+.nav-tabs a{
+  color: black;
+}
+.highlight{
+  display: inline-flex;
+  padding: 0 .1em;
+  background: #D8C27F;
+}
+
+.home .main{
+  background-image: url('../images/hero.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.home .hero{
+  padding: 9rem;
+}
+
+.intro-text{
+  color: white;
+  font-size: 24px;
+}
+.intro-text{
+  color: white;
+  font-size: 24px;
+}
+.yellow-heading, .color-secondary{
+  color: #D8C27F;
+}
+
+.credits-list p{
+  margin-top: 1.5rem;
+  color: white;
+}
+
+.footer{
+  background: black;
+  color: white;
+  padding: 3rem 0rem;
+}
+.footer__logo img {
+  float: right;
+}

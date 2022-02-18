@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scrollytelling</title>
+    <link rel="stylesheet" href="hwrd-gaslit.css">
+<!--^Taking away CSS is fine, all necessary styling is in the figure (embed) or should take it from ASU default elements, the css here is just to mimic how it might display.-->
+</head>
+<body>
+<article class="hwrd-article">
+<p>
+    FILLER Scientists and regulators point to a number of factors to explain the diverging discrepancies. For one, six states allow companies to combine their flaring and venting volumes when they report them — but the satellites rely on heat signatures, meaning they can’t detect venting. For another, the roving satellites can’t be everywhere at once, meaning they don’t catch every flare — let alone every every small or intermittent flare.
+</p>
+<p>
+    FILLER Despite these issues, the fact that all nine states’ nunc aliquet bibendum strays so far from those of an independent check suggests that government data on flaring and venting is inaccurate or incomplete — and that state and federal policymakers don’t have a good grasp on the greenhouse gases spilling into the air.
+</p>
+<p>
+    FILLER That includes the Environmental Protection Agency and other decision makers crafting climate legislation at a critical stage in worldwide efforts to slow global warming.
+</p>
+<p>
+    FILLER “We’re absolutely underestimating emissions,” said Doty. “I can’t even fathom how much we’re underestimating emissions.”
+</p>
+
+
+<!--EMBED START-->
+<figure class="hwrd-scrolly-figure">
+    <script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
+    <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+
+
+    <style>
+        .scrolly {
+            /* FOR DEBUG ONLY */
+            /*border: 4px dashed blue;*/
+        }
+
+        .scrolly img, video {
+            height: auto;
+            max-width: 100%;
+            border-style: none;
+            display: block;
+            margin: 0;
+            padding: 0;
+            vertical-align: baseline;
+            box-sizing: border-box;
+        }
+
+        .scrolly-graphics {
+            height: 100vh;
+            overflow: hidden;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 0;
+        }
+
+        .scrolly-graphic {
+            height: 100vh;
+            position: absolute;
+            display: none;
+        }
+
+        .scrolly-graphic.is-active {
+            display: block;
+        }
+
+        .scrolly-graphic-content {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .scrolly-step {
+            height: 100vh;
+            position: relative;
+            z-index: 1;
+            -webkit-transform: translate3d(0, 0, 0); /* fixes safari bug */
+            /* FOR DEBUG ONLY */
+            /*outline: 2px dashed red;*/
+            /*background-color: rgba(255, 0, 0, 0.5);*/
+            /*margin-bottom: 100px;*/
+        }
+
+        .scrolly-step-short {
+            height: 50vh;
+        }
+
+        .scrolly-step-content {
+            background: #D8C27F;
+            box-shadow: 2px 4px 10px rgba(19, 30, 43, 0.3);
+            border-radius: 20px;
+            /*color: ;*/
+            padding: 1rem;
+            width: 85%;
+            margin: 0 auto;
+        }
+
+        .scrolly-step-content p {
+            padding-bottom: 0px;
+            font-size: 22px;
+            font-family: Arial, Helvetica, “Nimbus Sans L”, “Liberation Sans”, FreeSans, sans-serif;
+            font-weight: 400;
+            color: #191919;
+            line-height: 34px;
+            box-sizing: border-box;
+            margin: 0;
+            border: 0;
+        }
+
+        .scrolly-fig-caption {
+            padding: 1rem;
+            font-size: 1rem;
+            text-align: left;
+            font-family: Arial, Helvetica, “Nimbus Sans L”, “Liberation Sans”, FreeSans, sans-serif;
+            margin-top: 0px;
+        }
+
+        @media screen and (min-width: 1024px){
+            .scrolly-fig-caption {
+                margin-top: 0px;
+            }
+        }
+
+        @media screen and (min-width: 1440px){
+            .scrolly-fig-caption {
+                margin-top: 0px;
+            }
+        }
+
+
+        @media screen and (max-width: 1024px){
+            .scrolly-step-content p {
+                font-size: 20px;
+                line-height: 28px;
+            }
+        }
+        /*FOR MOBILE*/
+        @media screen and (max-width: 480px){
+            .scrolly-step-content p {
+                line-height: 21px;
+                font-size: 17px;
+            }
+        }
+
+        @media screen and (min-width: 900px) {
+
+            .scrolly-step-content {
+                width: 55%;
+            }
+
+            .scrolly-step-content-right {
+                transform: translateX(50%);
+                margin-right: 15%;
+            }
+
+            .scrolly-step-content-long{
+                width: 80%;
+            }
+
+            .scrolly-step-content-left {
+                transform: translateX(-50%);
+
+            }
+
+        }
+
+        .scrolly-step-content:last-child {
+            margin-bottom: 0;
+        }
+
+        /*transform images if needed*/
+        #g-slide-1-Artboard_1-img {
+        perspective(6px) translate3d(-3133px, 52px, -9px)
+        }
+        @media screen and (max-width: 480px){
+            #g-slide-1-Artboard_1-img {
+                transform: perspective(500px) translate3d(1px, 1px, 1px);
+            }
+        }
+        #g-slide-2-Artboard_1-img {
+            transform: perspective(500px) translate3d(1px, 1px, 1px);
+        }
+        @media screen and (max-width: 480px){
+            #g-slide-2-Artboard_1-img {
+                transform: perspective(500px) translate3d(1px, 1px, 1px);
+            }
+        }
+        #g-slide-3-Artboard_1-img {
+            transform: perspective(500px) translate3d(1px, 1px, 1px);
+        }
+        @media screen and (max-width: 480px){
+            #g-slide-3-Artboard_1-img {
+                transform: perspective(500px) translate3d(1px, 1px, 1px);
+            }
+        }
+        #g-slide-4-Artboard_1-img {
+            transform: perspective(500px) translate3d(1px, 1px, 1px);
+        }
+        @media screen and (max-width: 480px){
+            #g-slide-4-Artboard_1-img {
+                transform: perspective(500px) translate3d(1px, 1px, 1px);
+            }
+        }
+        #g-slide-5-Artboard_1-img {
+            transform: perspective(500px) translate3d(1px, 1px, 1px);
+        }
+        @media screen and (max-width: 480px){
+            #g-slide-5-Artboard_1-img {
+                transform: perspective(500px) translate3d(1px, 1px, 1px);
+            }
+        }
+        #g-slide-6-Artboard_1-img {
+            transform: perspective(500px) translate3d(1px, 1px, 1px);
+        }
+        @media screen and (max-width: 480px){
+            #g-slide-6-Artboard_1-img {
+                transform: perspective(500px) translate3d(1px, 1px, 1px);
+            }
+        }
+        #g-slide-7-Artboard_1-img {
+            transform: perspective(500px) translate3d(1px, 1px, 1px);
+        }
+        @media screen and (max-width: 480px){
+            #g-slide-7-Artboard_1-img {
+                transform: perspective(500px) translate3d(1px, 1px, 1px);
+            }
+        }
+        #g-slide-8-Artboard_1-img {
+            transform: perspective(500px) translate3d(1px, 1px, 1px);
+        }
+        @media screen and (max-width: 480px){
+            #g-slide-8-Artboard_1-img {
+                transform: perspective(500px) translate3d(1px, 1px, 1px);
+            }
+        }
+        #g-slide-9-Artboard_1-img {
+            transform: perspective(500px) translate3d(1px, 1px, 1px);
+        }
+        @media screen and (max-width: 480px){
+            #g-slide-9-Artboard_1-img {
+                transform: perspective(500px) translate3d(1px, 1px, 1px);
+            }
+        }
+        #g-slide-10-Artboard_1-img {
+            transform: perspective(500px) translate3d(1px, 1px, 1px);
+        }
+        @media screen and (max-width: 480px){
+            #g-slide-10-Artboard_1-img {
+                transform: perspective(500px) translate3d(1px, 1px, 1px);
+            }
+        }#g-slide-11-Artboard_1-img {
+             transform: perspective(500px) translate3d(1px, 1px, 1px);
+         }
+        @media screen and (max-width: 480px){
+            #g-slide-11-Artboard_1-img {
+                transform: perspective(500px) translate3d(1px, 1px, 1px);
+            }
+        }
+
+
+    </style>
+
+    <div class="scrolly scrolly-1">
+        <div class="scrolly-graphics">
+            <div class="scrolly-graphic scrolly-graphic-1 is-active">
+                <div class="scrolly-graphic-content">
+                    <img id="g-slide-1-Artboard_1-img" class="" alt="" src="img/slide-1-Artboard_1.png">
+                </div>
+            </div>
+
+            <div class="scrolly-graphic scrolly-graphic-2">
+                <div class="scrolly-graphic-content">
+                    <img id="g-slide-2-Artboard_1-img" class="" alt="" src="img/slide-2-Artboard_1.png">
+                </div>
+            </div>
+
+            <div class="scrolly-graphic scrolly-graphic-3">
+                <div class="scrolly-graphic-content">
+                    <img id="g-slide-3-Artboard_1-img" class="" alt="" src="img/slide-3-Artboard_1.png">
+                </div>
+            </div>
+
+            <div class="scrolly-graphic scrolly-graphic-4">
+                <div class="scrolly-graphic-content">
+                    <img id="g-slide-4-Artboard_1-img" class="" alt="" src="img/slide-4-Artboard_1.png">
+                </div>
+            </div>
+
+            <div class="scrolly-graphic scrolly-graphic-5">
+                <div class="scrolly-graphic-content">
+                    <img id="g-slide-5-Artboard_1-img" class="" alt="" src="img/slide-5-Artboard_1.png">
+                </div>
+            </div>
+
+            <div class="scrolly-graphic scrolly-graphic-6">
+                <div class="scrolly-graphic-content">
+                    <img id="g-slide-6-Artboard_1-img" class="" alt="" src="img/slide-6-Artboard_1.png">
+                </div>
+            </div>
+
+            <div class="scrolly-graphic scrolly-graphic-7">
+                <div class="scrolly-graphic-content">
+                    <img id="g-slide-7-Artboard_1-img" class="" alt="" src="img/slide-7-Artboard_1.png">
+                </div>
+            </div>
+
+            <div class="scrolly-graphic scrolly-graphic-8">
+                <div class="scrolly-graphic-content">
+                    <img id="g-slide-8-Artboard_1-img" class="" alt="" src="img/slide-8-Artboard_1.png">
+                </div>
+            </div>
+
+            <div class="scrolly-graphic scrolly-graphic-9">
+                <div class="scrolly-graphic-content">
+                    <img id="g-slide-9-Artboard_1-img" class="" alt="" src="img/slide-9-Artboard_1.png">
+                </div>
+            </div>
+
+            <div class="scrolly-graphic scrolly-graphic-10">
+                <div class="scrolly-graphic-content">
+                    <img id="g-slide-10-Artboard_1-img" class="" alt="" src="img/slide-10-Artboard_1.png">
+                </div>
+            </div>
+
+            <div class="scrolly-graphic scrolly-graphic-11">
+                <div class="scrolly-graphic-content">
+                    <img id="g-slide-11-Artboard_1-img" class="" alt="" src="img/slide-11-Artboard_1.png">
+                </div>
+            </div>
+
+        </div>
+        <!-- end .scrolly-graphics -->
+
+
+        <div class="scrolly-step" data-step="scrolly-graphic-1">
+            <div class="is-active scrolly-step-content">
+                <p>
+                    We use natural gas everyday to heat our homes, cook our food and dry our clothes. But where does natural gas come from and how do its emissions contribute to climate change?
+                </p>
+            </div>
+        </div>
+
+
+        <div class="scrolly-step" data-step="scrolly-graphic-2" data-scrollama-index="0">
+            <div class="scrolly-step-content">
+                <p>
+                    Natural gas is a fossil fuel released from the ground during oil and gas drilling.
+                </p>
+            </div>
+        </div>
+
+        <div class="scrolly-step" data-step="scrolly-graphic-3" data-scrollama-index="1">
+            <div class="scrolly-step-content scrolly-step-content-right">
+                <p>
+                    Fracking, a common form of drilling, is the process of injecting liquid into the ground at a high pressure, causing rock fixtures to crack open and release the natural gas and oil trapped inside.
+                </p>
+            </div>
+        </div>
+
+        <div class="scrolly-step" data-step="scrolly-graphic-4" data-scrollama-index="2">
+            <div class="scrolly-step-content scrolly-step-content-right">
+                <p>
+                    The natural gas that is extracted can either be sold on the market, used at the wellsite or disposed of entirely.
+                </p>
+            </div>
+        </div>
+
+        <div class="scrolly-step" data-step="scrolly-graphic-5" data-scrollama-index="3">
+            <div class="scrolly-step-content scrolly-step-content-right">
+                <p>
+                    Many drilling companies say it’s safer or more economical to dispose of the gas than to use or sell it. They do this by burning it off, or “flaring.”
+                </p>
+            </div>
+        </div>
+
+        <div class="scrolly-step" data-step="scrolly-graphic-6" data-scrollama-index="4">
+            <div class="scrolly-step-content scrolly-step-content-right">
+                <p>
+                    Natural gas is composed mainly of methane and other greenhouse gases, but flaring burns away a large percentage of those compounds, releasing mostly carbon dioxide into the atmosphere.
+                </p>
+            </div>
+        </div>
+
+        <div class="scrolly-step" data-step="scrolly-graphic-7" data-scrollama-index="5">
+            <div class="scrolly-step-content scrolly-step-content-right">
+                <p>
+                    However, many malfunctioning flares burn off less methane than they’re supposed to.
+                </p>
+            </div>
+        </div>
+
+        <div class="scrolly-step" data-step="scrolly-graphic-8" data-scrollama-index="5">
+            <div class="scrolly-step-content scrolly-step-content-right">
+                <p>
+                    These inefficient flares push a larger percentage of the greenhouse gas into the atmosphere.
+                </p>
+            </div>
+        </div>
+
+        <div class="scrolly-step" data-step="scrolly-graphic-9" data-scrollama-index="5">
+            <div class="scrolly-step-content scrolly-step-content-right">
+                <p>
+                    Some flares are unlit and simply “vent” methane directly into the air.
+                </p>
+            </div>
+        </div>
+
+        <div class="scrolly-step" data-step="scrolly-graphic-10" data-scrollama-index="5">
+            <div class="scrolly-step-content scrolly-step-content-right">
+                <p>
+                    Venting is invisible to the naked eye, yet it's more harmful than flaring.
+                </p>
+            </div>
+        </div>
+
+        <div class="scrolly-step" data-step="scrolly-graphic-11" data-scrollama-index="5">
+            <div class="scrolly-step-content scrolly-step-content-long">
+                <p>
+                    Methane released during flaring and venting has the potential to trap heat in the Earth’s atmosphere more than 80 times more than carbon dioxide within a 20-year period.
+                </p>
+            </div>
+        </div>
+
+        <!-- end scrolly steps -->
+    </div>
+    <!-- end .scrolly-1 -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const scrollys = document.querySelectorAll(".scrolly");
+            scrollys.forEach(function (item) {
+                const scrolly = item;
+                const scrollyGraphics =
+                    scrolly.querySelectorAll(".scrolly-graphic");
+                const scrollySteps = scrolly.querySelectorAll(".scrolly-step");
+
+                // initialize scrollama
+                const scroller = scrollama();
+                scroller
+                    .setup({
+                        step: scrollySteps,
+                        offset: 0.75,
+                        debug: false,
+                    })
+                    .onStepEnter((response) => {
+                        // { element, index, direction }
+                        const selector = "." + response.element.dataset.step;
+                        const graphic = scrolly.querySelector(selector);
+                        scrollyGraphics.forEach(function (item) {
+                            if (item == graphic) {
+                                item.classList.add("is-active");
+                            } else {
+                                item.classList.remove("is-active");
+                            }
+                        });
+                    });
+            });
+
+        });
+    </script>
+
+    <figcaption class="scrolly-fig-caption">
+        Nicole Sadek and Zach Van Arsdale for the Howard Center
+    </figcaption>
+
+<!--EMBED END-->
+
+</figure>
+
+<p>
+    Experts say flaring and venting are the “low-hanging fruit” of efforts to slow climate change.</p>
+
+<p>
+     FILLER Scientists and regulators point to a number of factors to explain the diverging discrepancies. For one, six states allow companies to combine their flaring and venting volumes when they report them — but the satellites rely on heat signatures, meaning they can’t detect venting. For another, the roving satellites can’t be everywhere at once, meaning they don’t catch every flare — let alone every every small or intermittent flare.
+</p>
+<p>
+    FILLER Despite these issues, the fact that all nine states’ nunc aliquet bibendum strays so far from those of an independent check suggests that government data on flaring and venting is inaccurate or incomplete — and that state and federal policymakers don’t have a good grasp on the greenhouse gases spilling into the air.
+</p>
+<p>
+    FILLER That includes the Environmental Protection Agency and other decision makers crafting climate legislation at a critical stage in worldwide efforts to slow global warming.
+</p>
+<p>
+    FILLER “We’re absolutely underestimating emissions,” said Doty. “I can’t even fathom how much we’re underestimating emissions.”
+</p>
+    </article>
+</body>
+</html>

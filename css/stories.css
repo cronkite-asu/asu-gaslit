@@ -1,0 +1,12 @@
+.hero-image{
+  padding: 0px
+}
+
+.hero-image img {
+  width: 100%;
+}
+
+.full-story p{
+  font-size: 24px;
+  font-family: arial;
+}
