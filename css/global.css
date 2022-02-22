@@ -1,5 +1,6 @@
 .home{
-  background-color: #020A10;
+  background: rgb(2,0,36);
+  background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(20,5,57,1) 100%);
 }
 
 .header {
@@ -10,9 +11,12 @@
   display: flex;
   padding: 2rem;
 }
-
+.logo{
+  margin-right: 40px;
+}
 .nav-tabs{
   border-bottom: none;
+  align-items: center;
 }
 
 .nav-tabs .nav-item:hover, .nav-link:hover{
@@ -38,11 +42,15 @@
 .home .hero{
   padding: 9rem;
 }
-
-.intro-text{
-  color: white;
-  font-size: 24px;
+.gaslit-image{
+  height: auto;
+  width: 100%;
 }
+
+.section {
+  margin-bottom: 6rem;
+}
+
 .intro-text{
   color: white;
   font-size: 24px;
@@ -63,4 +71,17 @@
 }
 .footer__logo img {
   float: right;
+}
+.footer a {
+  color: white;
+}
+p {
+  margin-top: 1.5rem;
+}
+
+
+@media only screen and (max-width: 767px){
+  .home .hero{
+    padding: 3rem;
+  }
 }

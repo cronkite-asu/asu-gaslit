@@ -24,13 +24,6 @@
   font-size: 24px;
 }
 
-a {
-  text-decoration: none;
-}
-p {
-  margin-top: 1.5rem;
-}
-
 .story__button {
   margin-top: 1.5rem;
   border: solid 1px black;
@@ -48,6 +41,6 @@ p {
   justify-content: space-between;
   padding: 2rem;
   background: white;
-  height: 420px;
+  height: 380px;
   max-height: 550px;
 }
