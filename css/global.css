@@ -79,6 +79,13 @@ p {
   margin-top: 1.5rem;
 }
 
+hr {
+  margin: 3rem 0;
+}
+
+.hidden{
+  display: none !important;
+}
 
 @media only screen and (max-width: 767px){
   .home .hero{

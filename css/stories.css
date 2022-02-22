@@ -6,12 +6,60 @@
   width: 100%;
 }
 
+.article__title{
+  margin-top: 4rem;
+}
+.article__subtitle{
+  margin: 2rem 0rem;
+}
+.article__author{
+  margin-top: 2rem;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+.full-story .text-block{
+  padding: 0px;
+}
 .full-story p{
   font-size: 24px;
   font-family: arial;
+  padding: 25px 0px;
+  margin: 0px;
+}
+.full-story img{
+  width: 100%;
+  padding: 25px 0px;
 }
 
 h5{
   font-weight: 700;
   font-size: 28px;
+}
+
+.pages{
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0rem 4rem;
+}
+.page{
+  display: flex;
+  align-items: center;
+}
+.page p{
+  margin: 0px;
+}
+.page a {
+  border: 1px solid black;
+  padding: 10px 20px;
+  border-radius: 50%;
+  color: black;
+}
+.previous p{
+  margin-left: 50px;
+}
+.next p{
+  margin-right: 50px;
 }
