@@ -31,7 +31,12 @@
 }
 .full-story img{
   width: 100%;
-  padding: 25px 0px;
+  padding: 25px 0px 5px;
+}
+.smaller-img{
+  width: 40%;
+  padding: 0px 25px 0px 0px;
+  float: left;
 }
 
 h5{
