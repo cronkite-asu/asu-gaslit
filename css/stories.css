@@ -79,9 +79,37 @@ h5{
   margin-right: 50px;
 }
 
+
+/* Edit for scrolling animation on Economics page */
+.scrolly-fig-caption{
+    margin-top: -250px !important;
+    margin-bottom: 200px !important;
+}
+
+
+@media only screen and (max-width: 1399px){
+  .scrolly-fig-caption{
+      margin-top: -300px !important;
+  }
+}
+
+
 @media only screen and (max-width: 767px){
   .smaller-img{
     width: 100%;
     padding: 0px 0px 25px 0px;
+  }
+  .scrolly-fig-caption{
+      margin-top: -400px !important;
+  }
+}
+
+@media only screen and (max-width: 574px){
+  .smaller-img{
+    width: 100%;
+    padding: 0px 0px 25px 0px;
+  }
+  .scrolly-fig-caption{
+      margin-top: -450px !important;
   }
 }
