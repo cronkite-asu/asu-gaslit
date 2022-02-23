@@ -68,9 +68,19 @@
   background: black;
   color: white;
   padding: 3rem 0rem;
+  margin-bottom: 0rem;
+}
+.footer__content p {
+  color: white;
+  font-size: 18px;
 }
 .footer__logo img {
   float: right;
+}
+.footer__copyright p{
+  color: white;
+  margin-top: 1.5rem;
+  font-size: 18px;
 }
 .footer a {
   color: white;
@@ -86,6 +96,7 @@ hr {
 .hidden{
   display: none !important;
 }
+
 
 @media only screen and (max-width: 767px){
   .home .hero{
