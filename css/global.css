@@ -9,10 +9,12 @@
 }
 .inside-header {
   display: flex;
-  padding: 2rem;
+  padding: 1rem;
+  align-items: flex-end;
 }
 .logo{
   margin-right: 40px;
+  padding: 0.5rem 1rem;
 }
 .nav-tabs{
   border-bottom: none;
@@ -101,5 +103,9 @@ hr {
 @media only screen and (max-width: 767px){
   .home .hero{
     padding: 3rem;
+  }
+  .inside-header{
+    flex-direction: column;
+    align-items: initial;
   }
 }
