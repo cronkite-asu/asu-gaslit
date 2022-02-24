@@ -9,7 +9,7 @@
 }
 .inside-header {
   display: flex;
-  padding: 1rem;
+  padding: 0rem 0rem 0.5rem;
   align-items: flex-end;
 }
 .logo{
